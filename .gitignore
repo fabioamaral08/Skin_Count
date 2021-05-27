@@ -131,3 +131,4 @@ dmypy.json
 
 # sensitive data
 credentials.json
+sheet_info.json

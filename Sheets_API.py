@@ -3,6 +3,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 import os
 import sys
+import json
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -15,7 +16,9 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 def get_from_sheets(sheet_page):
-    sheets='1WyTZhH5zl-IKGL6iYR1nL9W2n_8RNBg23BcCMcLsPys'
+    with open('sheet_info.json') as f:
+        sheet_json = json.load(f)
+    sheets= sheet_json['sheets']
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
 
@@ -36,7 +39,9 @@ def get_from_sheets(sheet_page):
     return df
 
 def update_sheets(df,sheet_page):
-    sheets='1WyTZhH5zl-IKGL6iYR1nL9W2n_8RNBg23BcCMcLsPys'
+    with open('sheet_info.json') as f:
+        sheet_json = json.load(f)
+    sheets= sheet_json['sheets']
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
 
